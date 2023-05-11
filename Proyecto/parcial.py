@@ -1,4 +1,4 @@
-#SHARLENNE AZUAJE PRIMER PARCIAL
+#MENÚ PRINCIPAL
 from biblioteca_datos import *
 from biblioteca_consignas import *
 from biblioteca_menu import *
