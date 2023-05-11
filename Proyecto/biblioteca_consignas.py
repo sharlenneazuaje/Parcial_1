@@ -22,30 +22,28 @@ def parser_csv(path:str)->list:
     import os
     lista_personajes = []
 
-    #Validamos que la ruta del archivo existe:
     if not os.path.isfile(path):
         print(f"Error. El archivo {path} no existe")
         return -1
     
-    #Validamos que el archivo no esté vacío
     archivo = open("DBZ.csv","r",encoding="UTF-8")
     if os.stat(path).st_size == 0:
         print(f"Error. El archivo {path} está vacío")
         return -2
 
     for line in archivo:
-        lectura = re.split(r"\s*\,\s*",line) #Leo cada línea y la separo por las comas
+        lectura = re.split(r"\s*\,\s*",line) 
         personaje = {}
-        personaje['Id'] = lectura[0] #Agrego al diccionario la posición 0 de la lista con la clave Id
+        personaje['Id'] = lectura[0] 
         personaje['Nombre'] = lectura[1]
         razas = lectura[2]
-        razas = re.split(r"-",razas) #separo el string razas por guiones, en caso de tenerlos
+        razas = re.split(r"-",razas) 
         personaje['Raza'] = razas
         personaje['Poder de pelea'] = lectura[3]
         personaje['Poder de ataque'] = lectura[4]
         habilidades = lectura[-1]
-        habilidades = re.split(r"\s*\|\$\%\s*",habilidades) #separo el string habilidades por los símbolos
-        habilidades[-1] = re.sub("\n","",habilidades[-1]) #sustituyo el \n por nada
+        habilidades = re.split(r"\s*\|\$\%\s*",habilidades) 
+        habilidades[-1] = re.sub("\n","",habilidades[-1]) 
         personaje['Habilidades'] = habilidades
         lista_personajes.append(personaje)
     archivo.close()
@@ -161,7 +159,7 @@ def sumar_datos(dato_1: int, dato_2: int)->int|bool:
         return suma
     else:
         return False
-    
+
 def calcular_promedio_pelea_ataque(dato_1: int, dato_2: int)->float|bool:
     '''
     Brief: calcula el promedio de dos datos
@@ -192,7 +190,7 @@ def mostrar_personajes_por_habilidad(lista: list, clave_buscada:str)->None|bool:
     '''
     if type(lista) == list and len(lista) > 0 and type(clave_buscada) == str and len(clave_buscada) > 0:
         habilidad_ingresada = input("Ingrese una habilidad: ").strip()
-        lista_habilidades = generar_lista_por_clave(lista,'Habilidades')
+        lista_habilidades = generar_lista_por_clave(lista,clave_buscada)
         
         if habilidad_ingresada in lista_habilidades and type(habilidad_ingresada) == str:
             for personaje in lista:
@@ -248,7 +246,7 @@ def random_personaje(lista:list)-> dict:
 
 def buscar_poder_ataque(nombre:str,lista:list)->int|bool:
     '''
-    Brief: Busca el poder de ataque en una lista según el nombre del personaje ingresado
+    Brief: Busca el poder de ataque en una lista según el nombre del personaje recibido como parámetro
     Parameters:
         nombre: string que representa el nombre del personaje
         lista: lista sobre la que se hace la busqueda
@@ -300,6 +298,7 @@ def jugar_batalla(lista:list)->str|bool:
         lista = lista sobre la que se hace la búsqueda
     Return: Un archivo text donde se alojan los datos de la batalla: fecha, ganador y perdedor
     False en caso de que los parámetros no cumplan con las validaciones
+    -1 en caso de que el nombre que se ingresó no exista
     '''
     if type(lista) == list and len(lista) > 0:
         personaje1 = seleccionar_personaje(lista) #tengo el nombre del primero
@@ -443,12 +442,11 @@ def leer_json()->None:
     '''
     import os
     nombre_archivo = input("Ingrese el nombre del archivo: ")
-    #Validamos que la ruta del archivo existe:
+    
     if not os.path.isfile(nombre_archivo):
         print(f"Error. El archivo {nombre_archivo} no existe")
         return -1
     
-    #Validamos que el archivo no esté vacío
     with open(nombre_archivo,"r", encoding="UTF-8") as archivo:
         if os.stat(nombre_archivo).st_size == 0:
             print(f"Error. El archivo {nombre_archivo} está vacío")
