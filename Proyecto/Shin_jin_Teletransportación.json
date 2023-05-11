@@ -1,0 +1,20 @@
+{
+    "personajes": [
+        {
+            "nombre": "Kibito",
+            "poder de ataque": 2500,
+            "habilidades": [
+                "Potara",
+                "Sanación divina"
+            ]
+        },
+        {
+            "nombre": "Supreme Kai",
+            "poder de ataque": 6000,
+            "habilidades": [
+                "Potara",
+                "Explosión de ki divino"
+            ]
+        }
+    ]
+}
