@@ -50,7 +50,8 @@ def dragon_ball_app():
         "5. Jugar batalla",
         "6. Guardar Json",
         "7. Leer Json",
-        "8. Salir"]
+        "8. Actualizar personajes Saiyan",
+        "9. Salir"]
     flag_generar_normalizar_datos = False
     while True:
         opcion = dragon_ball_menu_principal(menu_principal)
@@ -75,4 +76,6 @@ def dragon_ball_app():
             case 7:
                 leer_json()
             case 8:
+                actualizar_personajes(lista_personajes)
+            case 9:
                 break

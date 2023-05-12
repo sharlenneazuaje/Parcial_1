@@ -453,3 +453,32 @@ def leer_json()->None:
             return -2
         print(json.load(archivo))
 
+def actualizar_personajes(lista):
+    for personaje in lista:
+        razas = obtener_valor_clave(personaje,'Raza')
+        habilidades = obtener_valor_clave(personaje,'Habilidades')
+        poder_ataque = obtener_valor_clave(personaje, 'Poder de ataque')
+        poder_pelea = obtener_valor_clave(personaje,'Poder de pelea')
+
+        if 'Saiyan' in razas:
+            poder_pelea = ((poder_pelea * 50) / 100) + poder_pelea
+            poder_ataque = ((poder_ataque * 70) / 100) + poder_ataque
+            if 'Tranformación nivel dios' not in habilidades:
+                habilidades.append('Transformación nivel dios')
+
+            personaje['Poder de pelea'] = poder_pelea
+            personaje['Poder de ataque'] = poder_ataque
+            personaje['Habilidades'] = habilidades
+
+    with open('personajes_actualizados.csv','w', encoding='utf-8') as archivo:
+        for personaje in lista:
+            razas = obtener_valor_clave(personaje,'Raza')
+            if 'Saiyan' in razas:
+                registro = "{0},{1},{2},{3},{4},{5}\n"
+                registro = registro.format(personaje['Id'],
+                                            personaje['Nombre'],
+                                            personaje['Raza'],
+                                            personaje['Poder de pelea'],
+                                            personaje['Poder de ataque'],
+                                            personaje['Habilidades'])
+                archivo.write(registro)
