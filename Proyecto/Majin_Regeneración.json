@@ -1,0 +1,20 @@
+{
+    "personajes": [
+        {
+            "nombre": "Majin Buu",
+            "poder de ataque": 4800,
+            "habilidades": [
+                "Ataque de chocolate",
+                "Barrera mágica"
+            ]
+        },
+        {
+            "nombre": "Super Buu",
+            "poder de ataque": 6800,
+            "habilidades": [
+                "Ataque de chocolate",
+                "Barrera mágica"
+            ]
+        }
+    ]
+}

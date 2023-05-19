@@ -27,7 +27,8 @@ def dragon_ball_menu_principal(menu:list):
     if type(menu) == list and len(menu) > 0:
         imprimir_menu(menu)
         numero_opciones = len(menu)
-        opcion = int(input("Ingrese una opción: "))
+        opcion = input("Ingrese una opción: ")
+        opcion = sanitizar_entero(opcion)
 
         if opcion <= numero_opciones:
             return opcion
@@ -52,7 +53,9 @@ def dragon_ball_app():
         "7. Leer Json",
         "8. Actualizar personajes Saiyan",
         "9. Salir"]
+    
     flag_generar_normalizar_datos = False
+    
     while True:
         opcion = dragon_ball_menu_principal(menu_principal)
         match opcion:
@@ -61,21 +64,39 @@ def dragon_ball_app():
                 dragon_ball_normalizar_datos(lista_personajes)
                 flag_generar_normalizar_datos = True
             case 2:
-                listar_cantidad_por_clave(lista_personajes,'Raza')
+                if flag_generar_normalizar_datos == True:
+                    listar_cantidad_por_raza(lista_personajes)
+                else:
+                    print("Error. Debe generar y normalizar los datos primero")
             case 3:
-                listar_personajes_por_clave(lista_personajes,'Raza')
+                if flag_generar_normalizar_datos == True:
+                    listar_personajes_por_raza(lista_personajes)
+                else:
+                    print("Error. Debe generar y normalizar los datos primero")
             case 4:
-                mostrar_personajes_por_habilidad(lista_personajes,'Habilidades')
+                if flag_generar_normalizar_datos == True:
+                    listar_personajes_por_habilidad(lista_personajes)
+                else:
+                    print("Error. Debe generar y normalizar los datos primero")
             case 5: 
                 if flag_generar_normalizar_datos == True:
                     jugar_batalla(lista_personajes)
                 else:
                     print("Error. Debe generar y normalizar los datos primero")
             case 6:
-                generar_json_personajes(lista_personajes)
+                if flag_generar_normalizar_datos == True:
+                    generar_json_personajes(lista_personajes)
+                else:
+                    print("Error. Debe generar y normalizar los datos primero")
             case 7:
-                leer_json()
+                if flag_generar_normalizar_datos == True:
+                    leer_json()
+                else:
+                    print("Error. Debe generar y normalizar los datos primero")
             case 8:
-                actualizar_personajes(lista_personajes)
+                if flag_generar_normalizar_datos == True:
+                    generar_csv_personajes_actualizados(lista_personajes)
+                else:
+                    print("Error. Debe generar y normalizar los datos primero")
             case 9:
                 break
